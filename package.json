@@ -1,0 +1,22 @@
+{
+  "name": "copybacklogtasktitleandurl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "copy.js",
+  "scripts": {
+    "generate": "node_modules/google-closure-compiler/cli.js copy.js | sed -e 's/^/javascript:/' > copy.bookmarklet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watarukura/CopyBacklogTaskTitleAndUrl.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/watarukura/CopyBacklogTaskTitleAndUrl/issues"
+  },
+  "homepage": "https://github.com/watarukura/CopyBacklogTaskTitleAndUrl#readme",
+  "dependencies": {
+    "google-closure-compiler": "^20181210.0.0"
+  }
+}
