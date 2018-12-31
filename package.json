@@ -4,7 +4,7 @@
   "description": "",
   "main": "copy.js",
   "scripts": {
-    "generate": "node_modules/google-closure-compiler/cli.js copy.js | sed -e 's/^/javascript:/' > copy.bookmarklet"
+    "generate": "node_modules/google-closure-compiler/cli.js copy.js | sed -e '1,1s/^/javascript:/' > copy.bookmarklet"
   },
   "repository": {
     "type": "git",

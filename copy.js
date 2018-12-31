@@ -1,9 +1,26 @@
+// ==ClosureCompiler==
+// @compilation_level SIMPLE_OPTIMIZATIONS
+// @formatting pretty_print
+// ==/ClosureCompiler==
+
 javascript:(
     function(){
-        const title = document.querySelector(".title-group__title-text").innerText;
         const url = location.href.replace(/#.*/, '');
-        const project_key = url.split("/").pop();
-        const title_and_url =  "[" + project_key + " " + title + "]" + "(" + url + ")";
+        let title_and_url = "";
+        if (url.indexOf("wiki") != -1) {
+            let wiki_url = "";
+            document.querySelectorAll("link")
+                .forEach((item) => { if (item.href.indexOf("alias") != -1) {wiki_url = item.href} });
+            const wiki_title = document.querySelector("title").innerText.match(/\] (.*) \|/)[1];
+            title_and_url = "[" + wiki_title + "](" + wiki_url + ")";
+        } else if (url.indexOf("view") != -1) {
+            const title = document.querySelector(".title-group__title-text").innerText;
+            const project_key = url.split("/").pop();
+            title_and_url =  "[" + project_key + " " + title + "]" + "(" + url + ")";
+        } else {
+            alert("failed.");
+            return null;
+        }
         // execCopy https://qiita.com/simiraaaa/items/2e7478d72f365aa48356
         const temp = document.createElement('div');
         temp.appendChild(document.createElement('pre')).textContent = title_and_url;
