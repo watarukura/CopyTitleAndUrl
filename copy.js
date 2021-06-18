@@ -21,6 +21,10 @@ javascript:(
             const title = document.querySelector("title").innerText
             title_and_url =  `[${title}](${url})`;
             console.log(title_and_url)
+        } else if (url.indexOf("github.com") != -1) {
+            const title = document.querySelector(".gh-header-title").innerText
+            title_and_url =  `[${title}](${url})`;
+            console.log(title_and_url)
         } else {
             alert("failed.");
             return null;
