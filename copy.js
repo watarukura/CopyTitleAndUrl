@@ -1,33 +1,30 @@
 javascript:(
     function () {
         const url = location.href.replace(/#.*/, '');
-        let title_and_url = "";
-        if (url.includes("backlog.com")) {
-            if (url.includes("wiki")) {
-                let wiki_url = Array.from(document.querySelectorAll("link"))
-                    .filter(item => item.href.includes("alias"))[0];
-                const wiki_title = document.querySelector("title").innerText.match(/\] (.*) \|/)[1];
-                title_and_url = `[${wiki_title}](${wiki_url})`;
-            } else if (url.includes("view")) {
-                const title = document.querySelector(".title-group__title-text").innerText;
-                const project_key = url.split("/").pop();
-                title_and_url = `[${project_key} ${title}](${url})`;
+        const title = ((url) => {
+            if (url.includes("backlog.com") || url.includes("backlog.jp")) {
+                if (url.includes("wiki")) {
+                    return document.querySelector("title").innerText.match(/\] (.*) \|/)[1];
+                } else if (url.includes("view")) {
+                    const title = document.querySelector(".title-group__title-text").innerText;
+                    const project_key = url.split("/").pop();
+                    return project_key.concat(' ', title);
+                }
+            } else if (url.includes("notion.so")) {
+                return document.querySelector("title").innerText;
+            } else if (url.includes("github.com")) {
+                return document.querySelector(".gh-header-title").innerText;
+            } else if (url.includes("esa.io")) {
+                return document.querySelector(".post-title__name").innerText;
             }
-        } else if (url.includes("notion.so")) {
-            const title = document.querySelector("title").innerText
-            title_and_url = `[${title}](${url})`;
-        } else if (url.includes("github.com")) {
-            const title = document.querySelector(".gh-header-title").innerText
-            title_and_url = `[${title}](${url})`;
-        } else if (url.includes("esa.io")) {
-            const title = document.querySelector(".post-title__name").innerText
-            title_and_url = `[${title}](${url})`;
-        } else {
+        })(url);
+
+        if (title == null) {
             alert("failed.");
-            return null;
+            return;
         }
+        const title_and_url = `[${title}](${url})`;
         console.log(title_and_url);
         navigator.clipboard.writeText(title_and_url).then(() => console.log("copied!"))
     }
 )();
-
