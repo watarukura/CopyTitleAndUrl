@@ -15,7 +15,7 @@ javascript:(
             } else if (url.includes("github.com")) {
                 return document.querySelector(".gh-header-title").innerText;
             } else if (url.includes("esa.io")) {
-                return document.querySelector(".post-title__name").innerText;
+                return document.querySelector(".floating-header__left").innerText.replace("\n", ": ").replaceAll(" \n", "/");
             }
         })(url);
 
