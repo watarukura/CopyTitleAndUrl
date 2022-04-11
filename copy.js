@@ -14,8 +14,8 @@ javascript:(
                 return document.querySelector("title").innerText;
             } else if (url.includes("github.com")) {
                 return document.querySelector(".gh-header-title").innerText;
-            } else if (url.includes("esa.io")) {
-                return document.querySelector(".floating-header__left").innerText.replace("\n", ": ").replaceAll(" \n", "/");
+            } else if (url.includes("docbase.io")) {
+                return document.querySelector(".c-MemoHeader-title").innerText;
             }
         })(url);
 
